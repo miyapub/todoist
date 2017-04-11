@@ -1,8 +1,21 @@
 <?
 session_start();
 require "conn.php";
-$name=$_POST["name"];
-$pass=$_POST["pass"];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reg</title>
+    <link rel="stylesheet" href="css/style.css?v=3.3">
+    <body>
+
+<?
+$name=mysql_real_escape_string($_POST["name"]);
+$pass=mysql_real_escape_string($_POST["pass"]);
 $method = $_SERVER['REQUEST_METHOD'];
 if($method==='POST'){
     $sql="SELECT * FROM `users` where `users`.name='$name'";
@@ -17,28 +30,80 @@ if($method==='POST'){
         //header("location: login.php");
         //echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"5;url='login.php'\">";
         ?>
-        注册成功，请<a href="login.php">登录</a>。
+        
+        <div class="box-outer">
+            <div class="box-inner">
+                <div class="boxbar">
+                    <h2>注册成功</h2>
+                    <!--<a data-cmd="x-wot" href="#" class="closebutton"></a>-->
+                </div>
+                <div class="boxcontent">
+                    <div id="wot-cnt">
+                            注册成功，请<a href="login.php">登录</a>。
+                    </div>
+                </div>
+            </div>
+        </div>
         <?
     }else{
         ?>
-        用户名已经被注册了，请重新注册
-        <form method="post">
-        <input name="name" type="text">
-        <input name="pass" type="text">
-        <input type="submit" value="注册" />
-        </form>
+        
+        <div class="box-outer">
+            <div class="box-inner">
+                <div class="boxbar">
+                    <h2>用户名已经被注册了，请重新注册</h2>
+                    <!--<a data-cmd="x-wot" href="#" class="closebutton"></a>-->
+                </div>
+                <div class="boxcontent">
+                    <div id="wot-cnt">
+                            <form method="post">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="账号" name="name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input <input class="form-control" placeholder="密码" name="pass" type="text">
+                                </div>
+                                <input class="btn btn-primary" type="submit" value="注册" />
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?
     }
     ?>
     <?
 }else{
     ?>
-    <form method="post">
-    <input name="name" type="text">
-    <input name="pass" type="text">
-    <input type="submit" value="reg" />
-    </form>
+
+    <div class="box-outer">
+            <div class="box-inner">
+                <div class="boxbar">
+                    <h2>注册</h2>
+                    <!--<a data-cmd="x-wot" href="#" class="closebutton"></a>-->
+                </div>
+                <div class="boxcontent">
+                    <div id="wot-cnt">
+                            <form method="post">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="账号" name="name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input <input class="form-control" placeholder="密码" name="pass" type="text">
+                                </div>
+                                <input class="btn btn-primary" type="submit" value="注册" />
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?
 }
+?>
+
+<?
 mysql_close();
 ?>
+
+    </body>
+</html>
